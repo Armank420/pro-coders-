@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background-color: sapphire famingo ; */
+        color: white;
+        background-image: url("./glass1.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        /* background-color: linear-gradient(rgb(185, 57, 185), rgb(0, 0, 255)); */
+        border-radius: 20px;
+        background-size: 365 ;
+        font-family:   Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        
+background-color: linear-gradient(17deg, rgba(1,63,242,1) 0%, rgba(14,58,242,1) 8%, rgba(25,54,242,1) 15%, rgba(36,50,242,1) 22%, rgba(42,48,242,1) 26%, rgba(53,44,242,1) 33%, rgba(56,43,242,1) 35%, rgba(62,41,242,1) 39%, rgba(68,39,242,1) 43%, rgba(71,38,242,1) 45%, rgba(74,37,242,1) 47%, rgba(80,35,242,1) 51%, rgba(82,34,242,1) 52%, rgba(87,32,242,1) 55%, rgba(125,18,240,1) 79%, rgba(128,17,240,1) 81%, rgba(138,14,239,1) 87%, rgba(145,12,239,1) 91%, rgba(151,9,238,1) 95%);
+
+      }
+
+      .form-box {
+        max-width: 300px;
+        background: #ffffff27;
+        /* background-color: #6fd3fe; */
+        overflow: hidden;
+        border-radius: 16px;
+        color: #ffffff;
+        margin: auto;
+        margin-top: 100px;
+        height: auto;
+        backdrop-filter: blur(10px);
+      }
+
+      .form {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 32px 24px 24px;
+        gap: 16px;
+        text-align: center;
+      }
+
+      /*Form text*/
+      .title {
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+        color: #e0e0e0;
+      }
+
+      /*Inputs box*/
+      .form-container {
+        overflow: hidden;
+        border-radius: 8px;
+        background-color: #fff;
+        margin: 1rem 0 0.5rem;
+        width: 100%;
+      }
+
+      .input {
+        background: none;
+        border: 0;
+        outline: 0;
+        height: 40px;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+        font-size: 0.9rem;
+        padding: 8px 15px;
+      }
+
+      .form-section {
+        padding: 16px;
+        font-size: 0.85rem;
+        background-color: #e0ecfb;
+        box-shadow: rgb(0 0 0 / 8%) 0 -1px;
+        background: #faf9f9;
+      }
+
+      .form-section a {
+        font-weight: bold;
+        color: #0066ff;
+        transition: color 0.3s ease;
+      }
+
+      .form-section a:hover {
+        color: #005ce6;
+        text-decoration: underline;
+      }
+
+      /*Button*/
+      .form button {
+        background-color: #0066ff;
+        color: #fff;
+        border: 0;
+        border-radius: 24px;
+        padding: 10px 16px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      .form button:hover {
+        background-color: #005ce6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-box">
+      <form class="form">
+        <span class="title">Sign up</span>
+        <span class="subtitle">Create a free account with your email.</span>
+        <div class="form-container">
+          <input
+            type="text"
+            class="input"
+            placeholder="Full Name"
+            id="username"
+            name="name"
+          />
+          <input
+            type="email"
+            class="input"
+            placeholder="Email"
+            id="email"
+            name="email"
+          />
+          <input
+            type="password"
+            class="input"
+            placeholder="Password"
+            id="password"
+            name="password"
+          />
+          <input
+            type="number"
+            class="input"
+            placeholder="Class eg:-12"
+            id="class"
+            name="class"
+          />
+          <input
+            type="number"
+            class="input"
+            placeholder="Roll no eg:-1"
+            id="rollno"
+            name="rollno"
+          />
+        </div>
+        <button type="submit">Sign up</button>
+        <script>
+          document.querySelector(".form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            
+            let myUsername = document.getElementById("username").value;
+            let myEmail = document.getElementById("email").value;
+            let myPass = document.getElementById("password").value;
+            let myClass = document.getElementById("class").value;
+            let myRollNo = document.getElementById("rollno").value;
+        
+            const data = {
+              username: myUsername,
+              email: myEmail,
+              password: myPass,
+              class: myClass,
+              rollno: myRollNo
+            };
+        
+            fetch('http://localhost:5500/signup', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Success:', data);
+              alert('User registered successfully!');
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+          });
+        </script>
+        
+      </form>
+      <div class="form-section">
+        <p>Have an account? <a href="./signin.html">Log in</a></p>
+      </div>
+    </div>
+  </body>
+</html>
